@@ -68,7 +68,7 @@ The project includes a unified startup script that launches both the Backend and
 
 1.  **Open Terminal** in the project root:
     ```bash
-    cd /Users/f.nuno/Desktop/chatbot_2.0
+    cd CoachAI
     ```
 
 2.  **Run the Startup Script:**

@@ -20,7 +20,7 @@ trap cleanup SIGINT
 
 # 1. Start Backend
 echo -e "${GREEN}📦 Starting Backend Server (FastAPI)...${NC}"
-/Users/f.nuno/IronHack/Lab/Teste_MLX/mlx_finetuning_env/bin/python -m uvicorn backend.main:app --reload --port 8000 &
+./venv/bin/python -m uvicorn backend.main:app --reload --port 8000 &
 BACKEND_PID=$!
 
 # Wait a moment for backend to initialize
