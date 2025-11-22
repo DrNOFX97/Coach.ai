@@ -1,0 +1,7 @@
+{
+  "epoch": 0,
+  "step": 0,
+  "best_loss": 999999,
+  "start_time": "2025-10-30T00:00:00.000000",
+  "checkpoints": []
+}

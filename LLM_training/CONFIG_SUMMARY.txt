@@ -1,0 +1,217 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║         MACBOOK PRO M1 16GB - CONFIGURAÇÕES DE TREINO FINAL              ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+📊 RESUMO EXECUTIVO
+═══════════════════════════════════════════════════════════════════════════
+
+MODELO:                  Mistral-7B v0.1 (quantizado INT4)
+MÉTODO:                  QLoRA (Quantized Low-Rank Adaptation)
+DATASET:                 943 exemplos Farense (848 train, 95 valid)
+HARDWARE:                MacBook Pro M1 16GB RAM
+TEMPO ESTIMADO:          2-3 horas
+
+═══════════════════════════════════════════════════════════════════════════
+🎯 PARÂMETROS PRINCIPAIS (M1 16GB OTIMIZADO)
+═══════════════════════════════════════════════════════════════════════════
+
+TREINO:
+  ├─ Batch Size:                    4
+  ├─ Gradient Accumulation:         2
+  ├─ Effective Batch Size:          8 (4 × 2)
+  ├─ Learning Rate:                 2e-4 (0.0002)
+  ├─ Número de Épocas:              3
+  ├─ Warmup Steps:                  100
+  └─ Max Sequence Length:           512 tokens
+
+LoRA:
+  ├─ Rank:                          8
+  ├─ Scale:                         16
+  ├─ Dropout:                       0.0
+  └─ Target Modules:                7 (q,v,k,o,gate,up,down)
+
+CHECKPOINTING:
+  ├─ Save Every:                    200 steps
+  ├─ Validate Every:                200 steps
+  ├─ Log Every:                     10 steps
+  └─ Recovery:                      Automático (training_state.json)
+
+═══════════════════════════════════════════════════════════════════════════
+💾 USO DE MEMÓRIA ESPERADO
+═══════════════════════════════════════════════════════════════════════════
+
+Modelo Base (INT4):                 ~3.8 GB (permanente)
+LoRA Adapters:                      ~50 MB
+Batch Processing (4 exemplos):      ~3-4 GB
+Otimizador + Estado:                ~1-2 GB
+Overhead do Sistema:                ~2 GB
+                                    ─────────────
+Total Máximo:                       ~10-11 GB
+
+Disponível: 16 GB
+Margem de Segurança: 5-6 GB ✓
+
+═══════════════════════════════════════════════════════════════════════════
+⚡ VELOCIDADE ESPERADA
+═══════════════════════════════════════════════════════════════════════════
+
+Tokens por Segundo:                 300-500 tok/s
+Exemplos por Segundo:               ~3-5 ex/s
+Passos por Minuto:                  ~180-300 passos/min
+Tempo por Época:                    ~35-40 minutos
+Tempo Total (3 épocas):             ~2-3 horas
+
+═══════════════════════════════════════════════════════════════════════════
+📈 TRAJETÓRIA DE LOSS ESPERADA
+═══════════════════════════════════════════════════════════════════════════
+
+ÉPOCA 1:
+  Passo  10: Loss 4.85  |  Val Loss 4.50
+  Passo  50: Loss 3.87  |  Val Loss 3.65
+  Passo 100: Loss 3.45  |  Val Loss 3.20
+  Passo 150: Loss 3.12  |  Val Loss 3.00
+  Final: ~3.0
+
+ÉPOCA 2:
+  Passo  50: Loss 2.45  |  Val Loss 2.30
+  Passo 100: Loss 2.15  |  Val Loss 2.05
+  Final: ~2.0
+
+ÉPOCA 3:
+  Passo  50: Loss 1.65  |  Val Loss 1.70
+  Passo 100: Loss 1.50  |  Val Loss 1.65
+  Final: ~1.5
+
+✓ Loss deve diminuir consistentemente
+✓ Val_loss deve acompanhar train_loss
+✓ Se divergir = possível overfitting (reduzir LR)
+
+═══════════════════════════════════════════════════════════════════════════
+📂 FICHEIROS IMPORTANTES
+═══════════════════════════════════════════════════════════════════════════
+
+DADOS:
+  ✓ data/train.jsonl                (848 exemplos)
+  ✓ data/valid.jsonl                (95 exemplos)
+
+MODELO:
+  ✓ models/mistral-7b-4bit/         (3.8 GB, base)
+
+NOTEBOOK:
+  ✓ notebooks/mistral_qlora_training_m1_optimized.ipynb  (USE ESTE!)
+
+SCRIPTS:
+  ✓ scripts/train_qlora.py           (alternativa ao notebook)
+  ✓ scripts/monitor.py               (monitoramento em tempo real)
+  ✓ scripts/visualization.py         (gerar gráficos)
+  ✓ scripts/inference_qlora.py       (testar modelo)
+
+OUTPUT:
+  ← checkpoints_qlora/               (durante treino)
+  ← output/mistral-7b-farense-qlora/ (após treino)
+
+═══════════════════════════════════════════════════════════════════════════
+🚀 COMO COMEÇAR
+═══════════════════════════════════════════════════════════════════════════
+
+1. VERIFICAÇÃO PRÉ-TREINO (5 min):
+   
+   python3 --version                  # Verificar Python 3.11+
+   python3 -c "import mlx.core as mx; print(mx.default_device())"  # GPU?
+   wc -l data/train.jsonl data/valid.jsonl  # Dados existem?
+   ls -lh models/mistral-7b-4bit/model.safetensors  # Modelo?
+
+2. ABRIR NOTEBOOK (instantâneo):
+   
+   jupyter notebook notebooks/mistral_qlora_training_m1_optimized.ipynb
+
+3. EXECUTAR CÉLULAS (2-3 horas):
+   
+   Seção 1: Setup (2-3 min)
+   Seção 2: Config (mostra batch_size=4)
+   Seção 3-6: Load & Tokenize (3-5 min)
+   Seção 7: TRAIN (2-3 horas) ← DEIXE RODAR
+   Seção 8-10: Test & Save (5 min)
+
+4. MONITORAR (em terminal separado):
+   
+   python3 scripts/monitor.py --output-dir checkpoints_qlora --refresh 5
+
+5. TESTAR (após treino):
+   
+   python3 scripts/inference_qlora.py "Qual foi..."
+   python3 scripts/visualization.py --report
+
+═══════════════════════════════════════════════════════════════════════════
+⚙️ AJUSTES SE NECESSÁRIO
+═══════════════════════════════════════════════════════════════════════════
+
+SE ERRO "Out of Memory":
+  batch_size = 2  (em vez de 4)
+  gradient_accumulation_steps = 4  (em vez de 2)
+
+SE LOSS NÃO DIMINUI:
+  learning_rate = 5e-4  (em vez de 2e-4)
+  num_epochs = 4 ou 5  (em vez de 3)
+
+SE QUER MELHOR QUALIDADE:
+  num_epochs = 5  (mais épocas = melhor)
+  max_seq_length = 768  (mas cuidado com memória!)
+
+═══════════════════════════════════════════════════════════════════════════
+✅ CHECKLIST PRÉ-TREINO
+═══════════════════════════════════════════════════════════════════════════
+
+☐ Python 3.11+ instalado
+☐ MLX com GPU detectado (device = gpu)
+☐ Dataset pronto (train.jsonl, valid.jsonl)
+☐ Modelo baixado (3.8GB, mistral-7b-4bit/)
+☐ Jupyter instalado
+☐ Navegador fechado (economiza memória)
+☐ Outras aplicações pesadas fechadas
+☐ Notebook aberto
+
+═══════════════════════════════════════════════════════════════════════════
+📞 PRÓXIMAS ETAPAS
+═══════════════════════════════════════════════════════════════════════════
+
+1. Treinar modelo (notebook)           ~2-3 horas
+2. Validar qualidade (inference)       ~5 min
+3. Gerar relatórios (visualization)    ~5 min
+4. Analisar métricas (JSON/CSV)        ~5 min
+5. Integrar em produção                variável
+
+═══════════════════════════════════════════════════════════════════════════
+🎯 BATCH SIZE EXPLICADO (POR QUE 4?)
+═══════════════════════════════════════════════════════════════════════════
+
+Batch Size = 4 significa:
+├─ Carrega 4 exemplos por vez
+├─ Faz forward/backward em 4 exemplos
+├─ Usa ~3-4 GB memória por batch
+├─ Com gradient_accumulation=2:
+│  ├─ Faz 2 batches (8 exemplos)
+│  ├─ Depois atualiza pesos
+│  └─ Efetivo é como treinar com batch_size=8
+└─ Mas usa menos memória instantânea!
+
+Comparação M1:
+├─ M1 Base (8GB):    batch_size = 2
+├─ M1 Pro (16GB):    batch_size = 4  ← VOCÊ
+└─ M1 Max (32GB):    batch_size = 8
+
+═══════════════════════════════════════════════════════════════════════════
+
+TUDO PRONTO? COMECE COM:
+
+jupyter notebook notebooks/mistral_qlora_training_m1_optimized.ipynb
+
+═══════════════════════════════════════════════════════════════════════════
+
+Criado para: MacBook Pro M1 16GB
+Data: 18 Novembro 2025
+Status: ✅ Pronto para Treino
+
+Boa sorte! ⚽🤖

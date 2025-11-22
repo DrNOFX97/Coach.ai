@@ -1,0 +1,343 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  SAFE TRAIN - MAPA DE NAVEGAÇÃO VISUAL                   ║
+║                     Sistema de Diagnóstico + Treino Seguro                ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────────────────┐
+│                          VOCÊ ESTÁ AQUI 👈                               │
+│                      📍 COMEÇAR SETUP DO TREINO                          │
+│                                                                            │
+│  Escolha uma opção abaixo:                                               │
+└──────────────────────────────────────────────────────────────────────────┘
+
+
+OPÇÃO A: ⚡ RÁPIDO (Automático - 10 minutos)
+═══════════════════════════════════════════════════════════════════════════
+
+        terminal$ ./train_safe.sh
+                    │
+                    ├─ Menu Interativo Colorido
+                    │
+                    ├─ Opção 1: Abrir Notebook
+                    │  └─ Atualizar config
+                    │  └─ Executar treino
+                    │
+                    ├─ Opção 2: Rodar Script Python
+                    │  └─ Treino automatizado
+                    │
+                    └─ Opção 3: Ver Instruções Manuais
+                       └─ Fazer tudo manualmente
+
+
+OPÇÃO B: 🔍 CONTROLADO (Manual passo a passo - 15 minutos)
+═════════════════════════════════════════════════════════════════════════════
+
+    1. DIAGNÓSTICO
+       terminal$ python3 scripts/preflight_check.py
+                   │
+                   ├─ Verifica Python, MLX, GPU
+                   ├─ Valida dados e modelo
+                   └─ Gera recommended_config.json ⭐
+                       │
+                       └─ checkpoints_qlora/recommended_config.json
+
+    2. VER RECOMENDAÇÕES
+       terminal$ cat checkpoints_qlora/recommended_config.json
+                   │
+                   ├─ batch_size: ?
+                   ├─ gradient_accumulation: ?
+                   ├─ max_seq_length: ?
+                   ├─ learning_rate: ?
+                   └─ ... copiar esses valores!
+
+    3. ABRIR NOTEBOOK
+       terminal$ jupyter notebook notebooks/mistral_qlora_training.ipynb
+                   │
+                   ├─ Localizar: "training_config = {"
+                   │
+                   ├─ Atualizar campos:
+                   │  ├─ batch_size
+                   │  ├─ gradient_accumulation
+                   │  ├─ max_seq_length
+                   │  ├─ learning_rate
+                   │  └─ (com valores do passo 2)
+                   │
+                   └─ Executar cells: Shift+Enter (ou "Run All")
+
+    4. MONITORAR (Terminal Separada)
+       terminal$ python3 scripts/monitor.py --refresh 5
+                   │
+                   ├─ Loss em tempo real
+                   ├─ Uso de memória
+                   └─ ETA até conclusão
+
+    5. APÓS TREINO
+       terminal$ python3 scripts/visualization.py --report
+       terminal$ python3 scripts/inference_qlora.py "pergunta"
+
+
+OPÇÃO C: 📖 EDUCACIONAL (Ler documentação - 30 minutos)
+═══════════════════════════════════════════════════════════════════════════
+
+    Leitura Recomendada
+    ───────────────────
+
+    1️⃣  SAFE_TRAIN_START_HERE.md (5 min)
+        ├─ O que é o sistema?
+        ├─ Como começar?
+        ├─ Próximos passos
+        └─ Índice de recursos
+
+    2️⃣  README_PREFLIGHT.md (15 min)
+        ├─ O que preflight_check faz?
+        ├─ O que cada parâmetro significa?
+        ├─ Troubleshooting
+        └─ Exemplos por hardware
+
+    3️⃣  APPLY_RECOMMENDED_CONFIG.md (10 min)
+        ├─ Como atualizar notebook?
+        ├─ Passo a passo detalhado
+        ├─ Checklist de validação
+        └─ Exemplos práticos
+
+    Depois, seguir OPÇÃO A ou B
+
+
+ESTRUTURA DE FICHEIROS
+═══════════════════════════════════════════════════════════════════════════
+
+LLM_training/
+│
+├── 🚀 COMO COMEÇAR (LEIA ESTES PRIMEIRO!)
+│   ├── SAFE_TRAIN_START_HERE.md ⭐ (5 min)
+│   ├── SAFE_TRAIN_MAP.txt (você está aqui!)
+│   └── SISTEMA_SAFE_TRAIN_SUMMARY.txt (resumo)
+│
+├── 📚 DOCUMENTAÇÃO
+│   ├── README_PREFLIGHT.md (guia completo)
+│   ├── SAFE_TRAIN_QUICK_START.md (workflow + troubleshooting)
+│   ├── APPLY_RECOMMENDED_CONFIG.md (como atualizar notebook)
+│   └── CLAUDE.md (contexto do projeto)
+│
+├── 🔧 SCRIPTS
+│   ├── train_safe.sh ⭐ (wrapper bash - FÁCIL)
+│   └── scripts/
+│       ├── preflight_check.py (diagnóstico do sistema)
+│       ├── safe_train.py (wrapper Python)
+│       ├── train_qlora.py (treino principal)
+│       ├── monitor.py (monitorar em tempo real)
+│       ├── inference_qlora.py (testar modelo)
+│       └── visualization.py (gerar gráficos)
+│
+├── 📊 DADOS
+│   └── data/
+│       ├── train_v3_final_complete.jsonl
+│       └── valid_v3_final_complete.jsonl
+│
+├── 📓 NOTEBOOKS
+│   └── notebooks/
+│       └── mistral_qlora_training.ipynb
+│
+└── 📂 CHECKPOINTS (GERADO APÓS TREINO)
+    └── checkpoints_qlora/
+        ├── preflight_report.json ⭐ (ver após diagnóstico)
+        ├── recommended_config.json ⭐ (COPIAR VALORES DAQUI)
+        ├── checkpoint_epoch_*/
+        ├── adapters/
+        ├── training_metrics.json
+        ├── training_summary.json
+        └── plots/
+
+
+DECISÃO RÁPIDA
+═══════════════════════════════════════════════════════════════════════════
+
+Sou iniciante?
+  └─→ OPÇÃO A: ./train_safe.sh
+      (menu interativo, muito fácil)
+
+Quero entender tudo?
+  └─→ OPÇÃO C: Ler documentação
+      (depois seguir OPÇÃO A)
+
+Sou um power user?
+  └─→ OPÇÃO B: Passo a passo manual
+      (controle total)
+
+Tenho pressa?
+  └─→ OPÇÃO A: ./train_safe.sh
+      (mais rápido)
+
+Já treinei antes?
+  └─→ OPÇÃO B: Passo a passo manual
+      (conheces o fluxo)
+
+
+FLUXO VISUAL DO SISTEMA
+═══════════════════════════════════════════════════════════════════════════
+
+                        ┌──────────────────┐
+                        │  PREFLIGHT CHECK │
+                        │  Diagnóstico do  │
+                        │  Sistema         │
+                        └────────┬─────────┘
+                                 │
+                    ✓ Python OK?
+                    ✓ MLX OK?
+                    ✓ GPU OK?
+                    ✓ Dados OK?
+                    ✓ Modelo OK?
+                                 │
+                                 ▼
+                        ┌──────────────────┐
+                        │ RECOMENDAÇÃO     │
+                        │ Config Otimizada │
+                        │ Para Seu         │
+                        │ Hardware         │
+                        └────────┬─────────┘
+                                 │
+                    batch_size: ?
+                    grad_accum: ?
+                    seq_length: ?
+                    learn_rate: ?
+                                 │
+                                 ▼
+                        ┌──────────────────┐
+                        │ NOTEBOOK/SCRIPT  │
+                        │ Atualizar Config │
+                        │ + Executar       │
+                        └────────┬─────────┘
+                                 │
+                                 ▼
+                        ┌──────────────────┐
+                        │ TREINO           │
+                        │ 2-3 Horas        │
+                        └────────┬─────────┘
+                                 │
+                                 ▼
+                        ┌──────────────────┐
+                        │ MONITORAR        │
+                        │ (Monitor.py)     │
+                        │ Loss, RAM, ETA   │
+                        └────────┬─────────┘
+                                 │
+                                 ▼
+                        ┌──────────────────┐
+                        │ CHECKPOINTS      │
+                        │ Salvos em:       │
+                        │ checkpoints_     │
+                        │ qlora/adapters/  │
+                        └────────┬─────────┘
+                                 │
+                                 ▼
+                        ┌──────────────────┐
+                        │ ANÁLISE          │
+                        │ Visualização +   │
+                        │ Testes           │
+                        └──────────────────┘
+
+
+DURAÇÃO ESTIMADA
+═════════════════════════════════════════════════════════════════════════════
+
+Atividade                          Tempo
+──────────────────────────────────────────
+Preflight Check                    2 minutos
+Ver Recomendações                  1 minuto
+Atualizar Notebook                 2 minutos
+─────────────────────────────────────────
+SETUP TOTAL                        5 minutos
+─────────────────────────────────────────
+Treino (3 épocas)                  2-3 horas (depende de hardware)
+─────────────────────────────────────────
+Monitorar                          Contínuo durante treino
+─────────────────────────────────────────
+Análise Pós-Treino                 5 minutos
+─────────────────────────────────────────
+TOTAL GERAL                        2.5-3.5 horas
+
+
+CHECKLIST RÁPIDO
+═════════════════════════════════════════════════════════════════════════════
+
+PRÉ-DIAGNÓSTICO
+  □ Estou na pasta certa? /LLM_training
+  □ Tenho internet? (primeira descarga ~3.8GB)
+  □ Fechei aplicações pesadas?
+  □ Tenho terminal separada para monitor?
+
+DURANTE DIAGNÓSTICO
+  □ Rodei: python3 scripts/preflight_check.py
+  □ Verifiquei recommended_config.json
+  □ Copiei os valores corretos
+
+ANTES DE TREINO
+  □ Abri notebook
+  □ Localizei training_config
+  □ Atualizei todos os valores
+  □ Salvei o notebook
+  □ Lembrei de abrir monitor em terminal separada
+
+DURANTE TREINO
+  □ Monitor está rodando
+  □ Vejo loss diminuindo
+  □ Memória está OK
+  □ Nenhum erro visível
+
+PÓS-TREINO
+  □ Rodei visualization.py
+  □ Rodei inference_qlora.py para testar
+  □ Checkpoints foram salvos
+
+
+ERRO? COME AQUI!
+═════════════════════════════════════════════════════════════════════════════
+
+Erro de Preflight?
+  └─→ Ler: README_PREFLIGHT.md → Troubleshooting
+
+Out of Memory durante treino?
+  └─→ Aumentar gradient_accumulation
+  └─→ Reduzir batch_size
+  └─→ Reduzir max_seq_length
+
+Treino muito lento?
+  └─→ Aumentar batch_size
+  └─→ Aumentar learning_rate
+
+Loss não diminui?
+  └─→ Aumentar learning_rate
+  └─→ Aumentar warmup_steps
+
+Modelo não carrega?
+  └─→ Verificar: pip install mlx mlx-lm
+
+Não sabe o que fazer?
+  └─→ Ler: SAFE_TRAIN_QUICK_START.md → Troubleshooting
+
+Mais ajuda?
+  └─→ Ler: docs/troubleshooting/QLORA_TROUBLESHOOTING.md
+
+
+═════════════════════════════════════════════════════════════════════════════
+
+                    🚀 PRONTO PARA COMEÇAR?
+
+                    Copie uma destas linhas:
+
+              1. FÁCIL (recomendado):
+                 $ ./train_safe.sh
+
+              2. MANUAL:
+                 $ python3 scripts/preflight_check.py
+
+              3. LEITURA PRIMEIRO:
+                 $ less SAFE_TRAIN_START_HERE.md
+
+═════════════════════════════════════════════════════════════════════════════
+
+Versão: 1.0
+Data: 2024-11-18
+Status: ✅ Pronto para usar
+
+═════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+config/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary folders
+autiliza/
+# Team photos (keeping only WebP)
+public/fotografias/equipas/*.png
+
+# Video files - should not be versioned
+*.mp4
+*.avi
+*.mov
+*.mkv
+*.flv
+*.wmv
+dados/fotografias/equipas/**/*.mp4
+dados/fotografias/equipas/**/*.avi
+public/fotografias/equipas/**/*.mp4
+public/fotografias/equipas/**/*.avi
+
+# Coach.ai / LLM Training
+Coach.ai/node_modules/
+Coach.ai/dist/
+LLM_training/checkpoints_qlora/
+LLM_training/output/
+LLM_training/models/
+LLM_training/data/*.jsonl
+!LLM_training/data/example.jsonl
+backend/__pycache__/
+backend/services/__pycache__/
+backend_debug.log
+*.safetensors
+*.bin
+*.pth
+.DS_Store
+mlx_finetuning_env/

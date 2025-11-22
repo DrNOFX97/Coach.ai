@@ -1,0 +1,107 @@
+╔═══════════════════════════════════════════════════════════════════════════╗
+║                                                                           ║
+║                  🚀 SAFE TRAIN - COMECE AQUI! 🚀                        ║
+║                                                                           ║
+║        Sistema Automático de Diagnóstico + Treino Seguro                ║
+║                                                                           ║
+╚═══════════════════════════════════════════════════════════════════════════╝
+
+
+⚡ COMEÇAR AGORA (30 segundos)
+═══════════════════════════════════════════════════════════════════════════
+
+Copie e cole no terminal:
+
+    cd /Users/f.nuno/Desktop/chatbot_2.0/LLM_training
+    ./train_safe.sh
+
+Pronto! Sistema vai:
+  1. ✓ Verificar seu hardware
+  2. ✓ Testar tudo (Python, MLX, GPU, dados)
+  3. ✓ Recomendar configuração otimizada
+  4. ✓ Oferecer opções (notebook, script, ou instruções)
+
+
+❓ NÃO TEM PRESSA? (5 minutos)
+═══════════════════════════════════════════════════════════════════════════
+
+Quer ler documentação antes? Abra um destes:
+
+  • SAFE_TRAIN_START_HERE.md
+    → Explicação rápida + índice de recursos
+
+  • SAFE_TRAIN_MAP.txt
+    → Mapa visual com opções de início
+
+  • SISTEMA_SAFE_TRAIN_SUMMARY.txt
+    → Resumo técnico de ficheiros criados
+
+
+🔧 OPÇÕES DE INÍCIO
+═══════════════════════════════════════════════════════════════════════════
+
+1️⃣  AUTOMÁTICO (recomendado - mais fácil)
+    $ ./train_safe.sh
+    → Menu interativo com cores
+    → Escolher opção: notebook, script, ou ler guia
+
+2️⃣  MANUAL PASSO A PASSO
+    $ python3 scripts/preflight_check.py
+    → Ver: checkpoints_qlora/recommended_config.json
+    → Abrir notebook
+    → Copiar valores do config
+    → Executar
+
+3️⃣  DIRETO AO CÓDIGO
+    $ python3 scripts/train_qlora.py
+    → (Editar scripts/train_qlora.py com valores recomendados primeiro)
+
+
+📊 O QUE ACONTECE?
+═══════════════════════════════════════════════════════════════════════════
+
+1. Diagnóstico (2 minutos)
+   ├─ Verifica: Python, MLX, GPU, RAM, Disco
+   ├─ Valida: dados, modelo, dependências
+   └─ Gera: recommended_config.json com valores otimizados
+
+2. Aplicar Config (2 minutos)
+   ├─ Abrir notebook ou script
+   ├─ Copiar valores do config
+   └─ Salvar
+
+3. Treino (2-3 horas)
+   ├─ Executar notebook ou script
+   └─ Monitorar em terminal separada
+
+4. Resultados
+   ├─ Ver gráficos
+   ├─ Testar modelo
+   └─ Checkpoints salvos
+
+
+✅ SEM CRASHES
+═══════════════════════════════════════════════════════════════════════════
+
+Preflight check vai:
+  ✓ Detectar seu hardware exato
+  ✓ Recomendar configuração segura
+  ✓ Evitar erros comuns (Out of Memory, GPU não detectada, etc)
+  ✓ Validar todos os componentes
+
+
+📚 DEPOIS DE COMEÇAR
+═══════════════════════════════════════════════════════════════════════════
+
+Se der algum erro, abra:
+  → README_PREFLIGHT.md (troubleshooting)
+  → SAFE_TRAIN_QUICK_START.md (guide completo)
+
+
+═══════════════════════════════════════════════════════════════════════════
+
+                         PRONTO? VAMOS!
+
+    $ ./train_safe.sh
+
+═══════════════════════════════════════════════════════════════════════════

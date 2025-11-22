@@ -1,0 +1,22 @@
+
+--- A iniciar o processo de treino --- 
+A carregar modelo: models/mistral-7b-4bit com QLoRA
+Configuração QLoRA: {'quantization': 'int4', 'group_size': 64, 'num_layers': 8, 'lora_parameters': {'rank': 8, 'scale': 16, 'dropout': 0.0, 'keys': ['q_proj', 'v_proj', 'k_proj', 'o_proj', 'gate_proj', 'up_proj', 'down_proj']}, 'bias': 'none'}
+Configuração de Treino: {'num_epochs': 3, 'batch_size': 4, 'gradient_accumulation': 2, 'learning_rate': 0.0005, 'max_seq_length': 512, 'warmup_steps': 100, 'save_steps': 200, 'eval_steps': 200, 'log_steps': 10, 'lora_parameters_path': PosixPath('/Users/f.nuno/Desktop/chatbot_2.0/LLM_training/checkpoints_qlora/adapters.safetensors'), 'model_path': PosixPath('/Users/f.nuno/Desktop/chatbot_2.0/LLM_training/output/mistral-7b-farense-qlora')}
+Modelo e tokenizer carregados e LoRA aplicado.
+A carregar dados de treino de: /Users/f.nuno/Desktop/chatbot_2.0/LLM_training/data/train_v3_final_complete.jsonl
+A carregar dados de validação de: /Users/f.nuno/Desktop/chatbot_2.0/LLM_training/data/valid_v3_final_complete.jsonl
+Amostras de treino: 848
+Amostras de validação: 95
+Total de amostras: 943
+Estado de treino recuperado: Época 1, Passo 400, Melhor Val Loss 1.2645
+A carregar adaptadores de: /Users/f.nuno/Desktop/chatbot_2.0/LLM_training/checkpoints_qlora/adapters/adapters.safetensors
+Adaptadores carregados. A retomar treino.
+
+--- A iniciar o loop de treino --- 
+Total de passos de treino esperados: 636
+Época 2/{training_config['num_epochs']}: 0it [00:00, ?it/s]Época 2/{training_config['num_epochs']}: 0it [00:00, ?it/s]
+Época 3/{training_config['num_epochs']}:   0%|          | 0/212 [00:00<?, ?it/s]huggingface/tokenizers: The current process just got forked, after parallelism has already been used. Disabling parallelism to avoid deadlocks...
+To disable this warning, you can either:
+	- Avoid using `tokenizers` before the fork if possible
+	- Explicitly set the environment variable TOKENIZERS_PARALLELISM=(true | false)

@@ -1,0 +1,269 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                     ✅ SISTEMA SAFE TRAIN INSTALADO                        ║
+║             Sistema Automático de Diagnóstico + Recomendação             ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📦 FICHEIROS CRIADOS
+════════════════════════════════════════════════════════════════════════════
+
+SCRIPTS PYTHON
+──────────────
+✅ scripts/preflight_check.py
+   → Diagnóstico completo do sistema
+   → Testa Python, MLX, GPU, dados, modelo
+   → Recomenda config otimizada para seu hardware
+   → Gera: recommended_config.json
+
+✅ scripts/safe_train.py
+   → Wrapper Python com menu interativo
+   → Opção de abrir notebook ou executar script
+   → Mostra instruções pós-treino
+
+SCRIPT BASH
+───────────
+✅ train_safe.sh
+   → Wrapper bash (chamada única)
+   → Executa: ./train_safe.sh
+   → Menu colorido com opções
+
+DOCUMENTAÇÃO
+─────────────
+✅ SAFE_TRAIN_START_HERE.md (COMEÇA AQUI!)
+   → Quick start (5 minutos)
+   → Índice de recursos
+   → Próximos passos
+
+✅ README_PREFLIGHT.md
+   → Guia detalhado (15 minutos)
+   → O que cada parâmetro faz
+   → Troubleshooting completo
+
+✅ SAFE_TRAIN_QUICK_START.md
+   → Workflow completo (30 minutos)
+   → Cenários de recomendação por hardware
+   → Guia de troubleshooting avançado
+
+✅ APPLY_RECOMMENDED_CONFIG.md
+   → Como aplicar config ao notebook (10 minutos)
+   → Passo a passo com exemplos
+   → Checklist antes de executar
+
+
+🚀 COMO COMEÇAR (TL;DR)
+════════════════════════════════════════════════════════════════════════════
+
+Opção 1: Script Automático (RECOMENDADO - 5 min)
+─────────────────────────────────────────────────
+$ cd /Users/f.nuno/Desktop/chatbot_2.0/LLM_training
+$ ./train_safe.sh
+→ Menu interativo com opções
+
+Opção 2: Preflight Check Manual (5 min)
+───────────────────────────────────────
+$ python3 scripts/preflight_check.py
+$ cat checkpoints_qlora/recommended_config.json
+$ jupyter notebook notebooks/mistral_qlora_training.ipynb
+→ Atualizar valores de config no notebook
+→ Executar notebook
+
+Opção 3: Ler Documentação Primeiro (15 min)
+──────────────────────────────────────────
+1. Ler: SAFE_TRAIN_START_HERE.md
+2. Ler: APPLY_RECOMMENDED_CONFIG.md
+3. Correr: python3 scripts/preflight_check.py
+4. Seguir instruções
+
+
+📊 O QUE PREFLIGHT_CHECK.PY FAZ
+════════════════════════════════════════════════════════════════════════════
+
+Verifica:
+  ✓ Python versão (3.10+)
+  ✓ MLX instalado
+  ✓ MLX-LM instalado
+  ✓ Transformers instalado
+  ✓ Outras dependências (psutil, pandas, tqdm)
+  ✓ Mac M1/M2/M3 detectado
+  ✓ Metal GPU disponível
+  ✓ RAM disponível
+  ✓ Espaço em disco
+  ✓ Ficheiros de dados existem
+  ✓ Modelo pode ser carregado
+
+Recomenda (baseado em seu hardware):
+  ✨ batch_size (1, 2, 4, 8)
+  ✨ gradient_accumulation (1, 2, 4, 8)
+  ✨ max_seq_length (128, 256, 512)
+  ✨ learning_rate (1e-4 a 5e-4)
+  ✨ Todas outras configs
+
+
+📁 FICHEIROS GERADOS PELO SISTEMA
+════════════════════════════════════════════════════════════════════════════
+
+Após executar: python3 scripts/preflight_check.py
+
+checkpoints_qlora/
+├── preflight_report.json          ← Relatório técnico completo
+└── recommended_config.json        ← ⭐ COPIAR VALORES DAQUI PARA NOTEBOOK
+
+
+⚡ WORKFLOW RÁPIDO (2-3 HORAS TOTAL)
+════════════════════════════════════════════════════════════════════════════
+
+Terminal 1: Principais operações
+──────────────────────────────────
+1. python3 scripts/preflight_check.py          (2 min)
+2. cat checkpoints_qlora/recommended_config.json (1 min - copiar valores)
+3. jupyter notebook notebooks/mistral_qlora_training.ipynb (2-3 horas)
+   → Localizar "training_config"
+   → Colar valores do passo 2
+   → Clicar "Run All"
+
+Terminal 2: Monitorar treino (enquanto Terminal 1 está em execução)
+──────────────────────────────────────────────────────────────────
+python3 scripts/monitor.py --refresh 5
+→ Mostra loss, memória, ETA em tempo real
+
+Terminal 3: Após treino
+──────────────────────────
+python3 scripts/visualization.py --report
+python3 scripts/inference_qlora.py "sua pergunta"
+
+
+🎯 EXEMPLOS DE HARDWARE → CONFIG
+════════════════════════════════════════════════════════════════════════════
+
+M1 Base (8GB)
+─────────────
+batch_size: 2
+gradient_accumulation: 2
+max_seq_length: 512
+learning_rate: 0.0003
+→ Duração: 2.5 horas
+
+M1 Pro (16GB)
+──────────────
+batch_size: 4
+gradient_accumulation: 2
+max_seq_length: 512
+learning_rate: 0.0005
+→ Duração: 1.5 horas
+
+M1 Tight (< 6GB)
+────────────────
+batch_size: 1
+gradient_accumulation: 8
+max_seq_length: 128
+learning_rate: 0.0001
+→ Duração: 3-4 horas
+
+
+❌ SE DER ERRO
+════════════════════════════════════════════════════════════════════════════
+
+"Out of Memory" durante treino?
+────────────────────────────────
+1. Aumentar gradient_accumulation: 2 → 4 ou 8
+2. Ou reduzir batch_size: 4 → 2 → 1
+3. Ou reduzir max_seq_length: 512 → 256 → 128
+
+Treino muito lento?
+──────────────────
+1. Aumentar batch_size (se houver memória): 1 → 2 → 4
+2. Aumentar learning_rate: 0.0001 → 0.0003
+3. Reduzir warmup_steps
+
+Loss não diminui?
+─────────────────
+1. Aumentar learning_rate: 0.0001 → 0.0005
+2. Aumentar warmup_steps: 50 → 100 → 200
+3. Validar dados: python3 scripts/validate_jsonl.py data/train.jsonl
+
+Modelo não carrega?
+────────────────────
+1. python3 scripts/preflight_check.py → ver erros
+2. pip install mlx mlx-lm transformers
+3. Verificar espaço em disco (precisa 5+ GB)
+
+
+📚 DOCUMENTAÇÃO COMPLETA
+════════════════════════════════════════════════════════════════════════════
+
+Para Iniciar                   → SAFE_TRAIN_START_HERE.md (5 min)
+Para Entender Tudo             → README_PREFLIGHT.md (15 min)
+Para Workflow Completo         → SAFE_TRAIN_QUICK_START.md (30 min)
+Para Atualizar Notebook        → APPLY_RECOMMENDED_CONFIG.md (10 min)
+Para Entender QLoRA            → docs/guides/QLORA_GUIDE.md (45 min)
+Para Troubleshooting Avançado  → docs/troubleshooting/QLORA_TROUBLESHOOTING.md
+
+
+✅ CHECKLIST ANTES DE TREINAR
+════════════════════════════════════════════════════════════════════════════
+
+□ Executei: python3 scripts/preflight_check.py
+□ Verificar preflight_report.json para problemas
+□ Copiar valores de recommended_config.json
+□ Abrir notebook: jupyter notebook notebooks/mistral_qlora_training.ipynb
+□ Localizar "training_config"
+□ Colar valores do preflight (batch_size, gradient_accumulation, etc)
+□ Salvar notebook (Cmd+S ou Ctrl+S)
+□ Terminal 2 pronta para monitor: python3 scripts/monitor.py
+□ Outras aplicações pesadas fechadas
+□ Internet estável (pode descarregar ~3.8GB primeira vez)
+
+
+🎬 PRÓXIMOS PASSOS
+════════════════════════════════════════════════════════════════════════════
+
+1. Escolher início:
+   $ ./train_safe.sh                          (FÁCIL - menu interativo)
+   $ python3 scripts/preflight_check.py       (MANUAL)
+   less SAFE_TRAIN_START_HERE.md              (LER PRIMEIRO)
+
+2. Seguir instruções do preflight_check ou do script
+
+3. Atualizar notebook com valores recomendados
+
+4. Executar notebook
+
+5. Monitorar em terminal separada:
+   $ python3 scripts/monitor.py --refresh 5
+
+6. Após treino:
+   $ python3 scripts/visualization.py --report
+   $ python3 scripts/inference_qlora.py "pergunta"
+
+
+🆘 SUPORTE
+════════════════════════════════════════════════════════════════════════════
+
+Dúvida sobre:          Consulte:
+──────────────         ──────────
+Como começar?          SAFE_TRAIN_START_HERE.md
+Erro no preflight?     README_PREFLIGHT.md → Troubleshooting
+Como atualizar config? APPLY_RECOMMENDED_CONFIG.md
+Treino crashed?        SAFE_TRAIN_QUICK_START.md → Troubleshooting
+O que é QLoRA?         docs/guides/QLORA_GUIDE.md
+
+
+════════════════════════════════════════════════════════════════════════════
+
+🚀 PRONTO PARA COMEÇAR?
+
+Copie e cole no terminal:
+
+$ cd /Users/f.nuno/Desktop/chatbot_2.0/LLM_training
+$ ./train_safe.sh
+
+OU
+
+$ python3 scripts/preflight_check.py
+
+════════════════════════════════════════════════════════════════════════════
+
+Sistema criado: 2024-11-18
+Versão: 1.0
+Status: ✅ Pronto para usar
+
+════════════════════════════════════════════════════════════════════════════

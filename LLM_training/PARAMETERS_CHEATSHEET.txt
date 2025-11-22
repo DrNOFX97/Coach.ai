@@ -1,0 +1,250 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║         MACBOOK PRO M1 16GB - PARÂMETROS DE TREINO (CHEATSHEET)           ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+
+🎯 PARÂMETROS PRINCIPAIS
+════════════════════════════════════════════════════════════════════════════
+
+┌─ BATCH & MEMORY ─────────────────────────────────────────────────────────┐
+│                                                                            │
+│  batch_size = 4                    ← CARREGA 4 EXEMPLOS POR VEZ         │
+│  gradient_accumulation_steps = 2   ← ACUMULA 2 BATCHES ANTES ATUALIZAR  │
+│  effective_batch_size = 8          ← COMO SE FOSSE batch_size=8         │
+│                                                                            │
+│  memory_per_batch = ~3-4 GB        ← MEMÓRIA POR BATCH                  │
+│  total_max_memory = ~10-11 GB      ← TOTAL COM OVERHEAD                 │
+│  available_memory = 16 GB          ← SEU MACBOOK M1                     │
+│  safety_margin = 5-6 GB            ← MARGEM DE SEGURANÇA ✓              │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ TRAINING ───────────────────────────────────────────────────────────────┐
+│                                                                            │
+│  learning_rate = 2e-4              ← 0.0002 (PADRÃO PARA LoRA)         │
+│  num_epochs = 3                    ← 3 PASSADAS PELO DATASET             │
+│  warmup_steps = 100                ← AQUECIMENTO DOS PRIMEIROS 100 PASSOS│
+│  max_seq_length = 512              ← MÁXIMO 512 TOKENS POR EXEMPLO       │
+│                                                                            │
+│  eval_steps = 200                  ← VALIDAÇÃO A CADA 200 PASSOS        │
+│  save_steps = 200                  ← CHECKPOINT A CADA 200 PASSOS       │
+│  log_steps = 10                    ← OUTPUT A CADA 10 PASSOS            │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ LoRA CONFIGURATION ─────────────────────────────────────────────────────┐
+│                                                                            │
+│  lora_rank = 8                     ← DECOMPOSIÇÃO EM 8 DIMENSÕES        │
+│  lora_scale = 16                   ← ESCALA DE ADAPTAÇÃO                │
+│  lora_dropout = 0.0                ← SEM DROPOUT (DATASET PEQUENO)       │
+│                                                                            │
+│  target_modules = [                ← MÓDULOS PARA ADAPTAR:               │
+│    "q_proj",    # Query projection                                       │
+│    "v_proj",    # Value projection                                       │
+│    "k_proj",    # Key projection                                         │
+│    "o_proj",    # Output projection                                      │
+│    "gate_proj", # Gate (MLPs)                                            │
+│    "up_proj",   # Up projection                                          │
+│    "down_proj"  # Down projection                                        │
+│  ]                                                                         │
+│                                                                            │
+│  trainable_params = ~3.3M          ← DE 7.2B TOTAL (0.046%)             │
+│  memory_savings = 99.95%           ← ECONOMIZA QUASE TUDO!              │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+┌─ QUANTIZATION ───────────────────────────────────────────────────────────┐
+│                                                                            │
+│  quantization_bits = 4             ← INT4 QUANTIZATION                  │
+│  group_size = 64                   ← TAMANHO DE GRUPO                    │
+│                                                                            │
+│  original_model_size = 14 GB        ← MISTRAL-7B COMPLETO               │
+│  quantized_model_size = 3.8 GB      ← APÓS INT4                         │
+│  compression_ratio = 3.7x           ← 73% REDUÇÃO!                      │
+│                                                                            │
+└────────────────────────────────────────────────────────────────────────────┘
+
+
+⚡ VELOCIDADE ESPERADA
+════════════════════════════════════════════════════════════════════════════
+
+tokens_per_second = 300-500          ← VELOCIDADE DE PROCESSAMENTO
+examples_per_second = 3-5            ← EXEMPLOS POR SEGUNDO
+steps_per_minute = 180-300           ← PASSOS POR MINUTO
+
+time_per_epoch = 35-40 minutes       ← TEMPO POR ÉPOCA
+total_training_time = 2-3 HOURS      ← TEMPO TOTAL (3 ÉPOCAS)
+
+
+📈 TRAJETÓRIA DE LOSS ESPERADA
+════════════════════════════════════════════════════════════════════════════
+
+ÉPOCA 1:
+  Step  10: Loss 4.85  | Val Loss 4.50  | Status: APRENDENDO
+  Step  50: Loss 3.87  | Val Loss 3.65
+  Step 100: Loss 3.45  | Val Loss 3.20
+  Step 150: Loss 3.12  | Val Loss 3.00
+  Final:    Loss ~3.0  | Val Loss ~3.0
+
+ÉPOCA 2:
+  Step  50: Loss 2.45  | Val Loss 2.30  | Status: REFINANDO
+  Step 100: Loss 2.15  | Val Loss 2.05
+  Final:    Loss ~2.0  | Val Loss ~2.0
+
+ÉPOCA 3:
+  Step  50: Loss 1.65  | Val Loss 1.70  | Status: CONSOLIDANDO
+  Step 100: Loss 1.50  | Val Loss 1.65
+  Final:    Loss ~1.5  | Val Loss ~1.65
+
+INDICADORES SAUDÁVEIS:
+  ✓ Loss diminui consistentemente
+  ✓ Val Loss acompanha Train Loss
+  ✓ Diferença < 0.2 entre train e val (sem overfitting)
+
+
+🔢 DATASET
+════════════════════════════════════════════════════════════════════════════
+
+total_examples = 943
+train_examples = 848 (89.9%)
+valid_examples = 95 (10.1%)
+
+avg_tokens_per_example = ~30-40
+min_tokens = 8 (filtrado)
+max_tokens = 512 (limit)
+
+total_train_tokens = ~27-32K
+total_valid_tokens = ~3-4K
+
+
+💾 ARQUIVO FINAL (APÓS TREINO)
+════════════════════════════════════════════════════════════════════════════
+
+LOCALIZAÇÃO:
+  output/mistral-7b-farense-qlora/
+    └── adapters.safetensors  ← USE ESTE PARA INFERÊNCIA
+
+TAMANHO:
+  adapters.safetensors ≈ 50-100 MB
+  adapter_config.json ≈ 1 KB
+  training_config.json ≈ 1 KB
+  
+  TOTAL PARA USAR: ~100 MB (muito pequeno!)
+
+
+⚙️ AJUSTES SE NECESSÁRIO
+════════════════════════════════════════════════════════════════════════════
+
+SE ERRO "Out of Memory":
+  ─────────────────────
+  batch_size = 2           (reduzir de 4)
+  gradient_accumulation_steps = 4  (aumentar de 2)
+  → Effective batch = 8 (mantém-se igual)
+  → Memória: ~2 GB por batch
+
+SE LOSS NÃO DIMINUI:
+  ──────────────────
+  learning_rate = 5e-4     (aumentar 2.5x)
+  num_epochs = 4-5         (mais épocas)
+  → MAIS AGRESSIVO MAS CUIDADO COM OVERFITTING
+
+SE QUER MELHOR QUALIDADE:
+  ───────────────────────
+  num_epochs = 5           (mais épocas)
+  max_seq_length = 768     (CUIDADO: pode dar OOM)
+  learning_rate = 1e-4     (mais conservador)
+
+SE GPU NÃO ESTÁ SENDO USADO:
+  ─────────────────────────
+  Check: python3 -c "import mlx.core as mx; print(mx.default_device())"
+  Se não for "gpu": verificar MLX installation
+  Reinstalar: pip install mlx --upgrade
+
+
+📊 METRICAS MONITORADAS DURANTE TREINO
+════════════════════════════════════════════════════════════════════════════
+
+A CADA 10 PASSOS (log_steps):
+  • Loss (training loss)
+  • Learning rate
+  • Timestamp
+  → Salvo em: checkpoints_qlora/training_metrics.json
+
+A CADA 200 PASSOS (eval_steps):
+  • Validation loss
+  • Comparação train vs val
+  → Detecta overfitting se val >> train
+
+A CADA 200 PASSOS (save_steps):
+  • Salva checkpoint completo
+  • Permite retomar se falhar
+  → Localização: checkpoints_qlora/checkpoint_epoch*_step*/
+
+
+🚀 CHECKLIST PRÉ-TREINO
+════════════════════════════════════════════════════════════════════════════
+
+Antes de executar o notebook, verifique:
+
+☐ Python 3.11 ou superior
+  $ python3 --version
+
+☐ MLX instalado e GPU detectado
+  $ python3 -c "import mlx.core as mx; print(mx.default_device())"
+  Deve dizer: gpu (NÃO cpu)
+
+☐ Dataset existe e é válido
+  $ wc -l data/train.jsonl data/valid.jsonl
+  Deve dizer: 848 train.jsonl e 95 valid.jsonl
+
+☐ Modelo base existe (3.8GB)
+  $ ls -lh models/mistral-7b-4bit/model.safetensors
+  Deve ser ~3.8GB
+
+☐ Jupyter instalado
+  $ jupyter --version
+
+☐ Notebook pronto
+  $ ls notebooks/mistral_qlora_training_m1_optimized.ipynb
+  Deve existir
+
+☐ Navegador fechado (economiza ~2GB RAM)
+  Feche abas de web
+
+☐ Outras aplicações pesadas fechadas
+  Feche: Chrome pesado, Slack, etc.
+
+☐ Pronto para começar!
+  jupyter notebook notebooks/mistral_qlora_training_m1_optimized.ipynb
+
+
+📂 FICHEIROS GERADOS DURANTE TREINO
+════════════════════════════════════════════════════════════════════════════
+
+checkpoints_qlora/
+├── checkpoint_epoch0_step200/      ← Checkpoint 1
+├── checkpoint_epoch0_step400/      ← Checkpoint 2
+├── ...
+├── checkpoint_epoch2_step200/      ← Checkpoint final
+├── adapters/                        ← MELHOR MODELO
+│   ├── adapters.safetensors
+│   └── adapter_config.json
+├── training_metrics.json            ← DADOS TREINO (JSON)
+├── training_metrics.csv             ← DADOS TREINO (CSV)
+├── training_summary.json            ← RESUMO FINAL
+└── training_state.json              ← ESTADO PARA RESUMIR
+
+
+════════════════════════════════════════════════════════════════════════════
+
+DÚVIDAS? LEIA:
+  1. START_TRAINING_M1.md (30 seg)
+  2. CONFIG_SUMMARY.txt (2 min)
+  3. M1_16GB_OPTIMIZATION.md (20 min)
+
+PRONTO? COMECE:
+  jupyter notebook notebooks/mistral_qlora_training_m1_optimized.ipynb
+
+════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,208 @@
+╔═══════════════════════════════════════════════════════════════════════════════╗
+║                   📚 ESTRUTURA DE DOCUMENTAÇÃO FINALIZADA                     ║
+║                                                                               ║
+║  Projeto: LLM Training - Mistral-7B LoRA/QLoRA Fine-tuning                   ║
+║  Data: 2025-11-17                                                            ║
+║  Status: ✅ ORGANIZADO E PRONTO PARA USO                                    ║
+╚═══════════════════════════════════════════════════════════════════════════════╝
+
+📁 HIERARQUIA DE FICHEIROS
+═══════════════════════════════════════════════════════════════════════════════
+
+LLM_training/
+│
+├── 📌 DOCS_INDEX.md ★★★ COMECE AQUI ★★★
+│   └─ Índice centralizado com toda a navegação
+│
+├── docs/
+│   │
+│   ├─ quickstart/ ⭐ PARA COMEÇAR
+│   │  ├─ QUICKSTART_QLORA.md .......... Guia rápido (5 min) - QLoRA novo
+│   │  ├─ START_HERE.md ............... Setup completo (10 min)
+│   │  └─ USE_SIMPLE_NOTEBOOK.md ...... Referência notebooks
+│   │
+│   ├─ guides/ 📖 GUIAS TÉCNICOS
+│   │  ├─ QLORA_GUIDE.md .............. QLoRA aprofundado (30 min)
+│   │  ├─ QLORA_VS_LORA.md ............ Comparação detalhada (20 min)
+│   │  ├─ FINETUNE_MLX_QLORA.md ....... Referência técnica
+│   │  ├─ mlx_finetuning_guide.md ..... MLX framework
+│   │  ├─ MONITORING_GUIDE.md ......... Monitoramento (15 min)
+│   │  ├─ SETUP_MONITORING.md ......... Setup monitoramento
+│   │  └─ OPTIMIZATION_GUIDE.md ....... Otimizações técnicas
+│   │
+│   ├─ references/ 📋 REFERÊNCIA RÁPIDA
+│   │  ├─ INDEX.md .................... Mapa geral do projeto
+│   │  ├─ README.md ................... Visão geral original
+│   │  ├─ README_QLORA_REFACTOR.md .... Sumário refatoração
+│   │  ├─ RESUMO_OTIMIZACOES.md ....... Sumário otimizações
+│   │  ├─ QUICK_START.md .............. 1 página quick ref
+│   │  ├─ QUICK_REFERENCE.md .......... Referência rápida
+│   │  ├─ CHECKLIST.md ................ Verificação antes de usar
+│   │  ├─ MONITORING_INDEX.md ......... Índice monitoramento
+│   │  └─ MONITORING_README.md ........ Readme monitoramento
+│   │
+│   ├─ troubleshooting/ 🔧 RESOLUÇÃO DE PROBLEMAS
+│   │  ├─ QLORA_TROUBLESHOOTING.md .... QLoRA problemas/soluções
+│   │  └─ troubleshooting.md .......... Troubleshooting geral
+│   │
+│   └─ legacy/ 📦 DOCUMENTAÇÃO ANTIGA
+│      ├─ CELL_EXECUTION_ORDER.md .... Antigo
+│      ├─ CLEANUP_COMPLETE.md ........ Antigo
+│      ├─ FIX_SUMMARY.md ............. Antigo (duplicado)
+│      ├─ QLORA_TRAINING_FIX.md ...... Antigo
+│      ├─ QLORA_TRAINING_FIXED.md .... Antigo
+│      ├─ QLORA_FIX_COMPARISON.md .... Antigo
+│      ├─ TRAINING_FIXES.md .......... Antigo
+│      ├─ ORGANIZATION_SUMMARY.md .... Antigo
+│      └─ GEMINI.md .................. Antigo (referência)
+│
+├── notebooks/
+│   ├─ mistral_qlora_training.ipynb ... ✅ NOVO - USE ESTE
+│   └─ mistral_lora_training.ipynb ... ⚠️ ANTIGO - Legacy
+│
+├── scripts/
+│   ├─ inference_qlora.py ............ ✅ NOVO - USE ESTE
+│   ├─ inference.py .................. ⚠️ ANTIGO - Legacy
+│   ├─ compare_models.py ............. Benchmark
+│   └─ [outros scripts]
+│
+├── data/
+│   ├─ train_data.jsonl .............. Dados treino
+│   └─ val_data.jsonl ................ Dados validação
+│
+├── checkpoints_qlora/ ................ Checkpoints NOVO (durante treino)
+├── checkpoints/ ...................... Checkpoints ANTIGO (legacy)
+│
+└── output/
+   ├─ mistral-7b-farense-qlora/ ...... Modelo NOVO ✅
+   └─ mistral-7b-farense-lora/ ....... Modelo ANTIGO ⚠️
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 ESTATÍSTICAS
+
+Total de ficheiros markdown: 29
+  • Documentação ativa: 20 ficheiros
+  • Documentação legacy: 9 ficheiros
+
+Organização por categoria:
+  • Quickstart: 3 ficheiros (guias para começar)
+  • Guides: 7 ficheiros (guias técnicos completos)
+  • References: 8 ficheiros (referência rápida)
+  • Troubleshooting: 2 ficheiros (resolução de problemas)
+  • Legacy: 9 ficheiros (antigo/histórico)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 COMO COMEÇAR
+
+1️⃣ LEIA ESTE FICHEIRO AGORA (você está aqui!)
+2️⃣ ABRA: DOCS_INDEX.md (na raiz do projeto)
+3️⃣ SIGA: As instruções do DOCS_INDEX.md
+4️⃣ PARA COMEÇAR TREINO AGORA:
+   → docs/quickstart/QUICKSTART_QLORA.md (5 min)
+   → jupyter notebook notebooks/mistral_qlora_training.ipynb
+   → Deixar treinar (2-3 horas)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 GUIA RÁPIDO POR CENÁRIO
+
+[Quero treinar AGORA]
+→ docs/quickstart/QUICKSTART_QLORA.md (5 min)
+
+[Quero entender QLoRA em detalhe]
+→ docs/guides/QLORA_GUIDE.md (30 min)
+
+[Quero comparar LoRA vs QLoRA]
+→ docs/guides/QLORA_VS_LORA.md (20 min)
+
+[Tenho um problema]
+→ docs/troubleshooting/QLORA_TROUBLESHOOTING.md
+
+[Quero referência rápida de tudo]
+→ docs/references/QUICK_REFERENCE.md (1 página)
+
+[Quero checklist antes de começar]
+→ docs/references/CHECKLIST.md
+
+[Quero monitorar o treinamento]
+→ docs/guides/MONITORING_GUIDE.md
+
+[Quero integrar com backend]
+→ docs/quickstart/START_HERE.md + INTEGRATION_GUIDE
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚠️ IMPORTANTE: QUAL VERSÃO USAR?
+
+USE QLORA (Novo - Recomendado):
+  ✅ Notebook: mistral_qlora_training.ipynb
+  ✅ Script: inference_qlora.py
+  ✅ Checkpoints: checkpoints_qlora/
+  ✅ Output: mistral-7b-farense-qlora/
+  ✅ Guias: docs/quickstart/QUICKSTART_QLORA.md
+
+NÃO USE LORA (Antigo - Legacy):
+  ❌ Notebook: mistral_lora_training.ipynb
+  ❌ Script: inference.py
+  ❌ Checkpoints: checkpoints/
+  ❌ Output: mistral-7b-farense-lora/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⏱️ TEMPO ESTIMADO
+
+Antes de começar:
+  • Ler QUICKSTART_QLORA.md: 5 min
+  • Ler START_HERE.md: 10 min
+  • Setup e instalações: 5 min
+  • TOTAL: 20 min
+
+Treino completo:
+  • Setup dados: 30 seg
+  • Carregamento modelo: 30 seg
+  • Epoch 1: ~30-45 min
+  • Epoch 2: ~30-45 min
+  • Epoch 3: ~30-45 min
+  • Export: 5 min
+  • TOTAL: ~2-3 horas
+
+Depois:
+  • Teste modelo: 5 min
+  • Integração backend: 15-30 min (opcional)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✨ STATUS
+
+✅ Documentação organizada por categoria
+✅ Índice central criado (DOCS_INDEX.md)
+✅ Ficheiros legacy preservados
+✅ Estrutura clara e intuitiva
+✅ Pronto para uso imediato
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🆘 PRECISA DE AJUDA?
+
+Não sabe por onde começar?
+→ Abra: DOCS_INDEX.md
+
+Quer treinar agora?
+→ Vá para: docs/quickstart/QUICKSTART_QLORA.md
+
+Tem um problema?
+→ Consulte: docs/troubleshooting/
+
+Quer entender tudo?
+→ Siga: docs/guides/
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Última atualização: 2025-11-17
+Versão: Final
+Status: ✅ PRONTO PARA PRODUÇÃO
+
+Próximo passo: Abra DOCS_INDEX.md! 🚀

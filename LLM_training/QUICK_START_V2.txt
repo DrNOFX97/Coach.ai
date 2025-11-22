@@ -1,0 +1,133 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    🚀 QUICK START - V2 TRAINING
+═══════════════════════════════════════════════════════════════════════════════
+
+⏱️  TIME: 2 minutes to start training
+
+═══════════════════════════════════════════════════════════════════════════════
+
+STEP 1: Open Terminal
+───────────────────────────────────────────────────────────────────────────────
+cd /Users/f.nuno/Desktop/chatbot_2.0/LLM_training
+
+STEP 2: Start Jupyter with MLX Kernel
+───────────────────────────────────────────────────────────────────────────────
+jupyter notebook notebooks/train_v2_optimized.ipynb
+
+STEP 3: Configure Kernel (if not auto-selected)
+───────────────────────────────────────────────────────────────────────────────
+- Click "Kernel" dropdown in top-right
+- Select "Python 3.11 (MLX)"
+
+STEP 4: Run Training
+───────────────────────────────────────────────────────────────────────────────
+- Press Ctrl+A to select all cells
+- Press Ctrl+Shift+Enter (or Cell → Run All)
+- Watch the output flow
+
+THAT'S IT! ✅
+───────────────────────────────────────────────────────────────────────────────
+
+⏱️  TRAINING DURATION: 3-4 hours (depending on early stopping)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 WHAT YOU'LL SEE:
+
+[Loading Model & Data] → [Training] → [Validation] → [Analysis] → [Results]
+
+Expected flow:
+  Epoch 1: ~40 minutes (largest)
+  Epoch 2: ~40 minutes + early stopping checks
+  Epoch 3: May stop early (if overfitting detected)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ SIGNS THAT TRAINING IS WORKING:
+
+  ✓ Loss decreases (5.0 → 3.0 → 2.0 → 1.5)
+  ✓ Validation loss follows training loss
+  ✓ Overfitting gap stays below 0.15 (target)
+  ✓ Early stopping shows patience counters
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📚 DOCUMENTATION:
+
+  Want details? Read these files:
+
+  - OVERFITTING_REDUCTION_V2.md     ← What changed and why
+  - RUN_TRAINING_V2.md              ← Step-by-step guide
+  - PREPARATION_COMPLETE_V2.md      ← Complete checklist
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔍 MONITORING (Optional - in another terminal):
+
+  python3 scripts/monitor.py --output-dir checkpoints_qlora --refresh 5
+
+  This shows:
+  - Real-time loss trajectory
+  - Memory usage
+  - Training progress
+  - Best model metrics
+
+═══════════════════════════════════════════════════════════════════════════════
+
+❓ QUICK TROUBLESHOOTING:
+
+  Q: "Kernel not found" or "MLX not available"
+  A: Make sure you selected the correct kernel dropdown (Python 3.11 MLX)
+
+  Q: "No space left on device"
+  A: Already fixed! 26GB freed. Should be fine.
+
+  Q: Training very slow?
+  A: Normal for first epoch (35-40 min). Check device in cell [1] output.
+
+  Q: Training stopped unexpectedly?
+  A: Likely early stopping (overfitting plateau detected). Check final analysis.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 KEY IMPROVEMENTS (V2 vs V1):
+
+  LoRA Rank:       8 → 6       (fewer params = less memorization)
+  Dropout:         0.0 → 0.08  (more regularization)
+  Batch Size:      4 → 2       (noisier = better generalization)
+  Learning Rate:   5e-4 → 2e-4 (slower = smoother optimization)
+  Early Stopping:  None → Yes  (auto-stop at plateau)
+
+  GOAL: Reduce overfitting gap from 2.27 → <0.15 ✅
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📁 OUTPUT FILES (after training):
+
+  checkpoints_qlora/
+    ├─ adapters/adapters.safetensors    ← Best model found
+    ├─ training_metrics.json            ← Loss history
+    ├─ training_summary.json            ← Final stats
+    └─ training_v2_results.png          ← Visualization
+
+  output/
+    └─ mistral-7b-farense-qlora-v2/     ← Final exported model
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎬 AFTER TRAINING (Next Steps):
+
+  1. Wait for notebook to complete
+  2. Review final overfitting analysis
+  3. Check that gap < 0.15 and F-1 > 0.93
+  4. Run evaluation: python3 scripts/evaluation_metrics.py
+  5. Compare with V1: check V1 backup metrics
+  6. Decide: Keep V2 or iterate further
+
+═══════════════════════════════════════════════════════════════════════════════
+
+Ready? Let's go! 🚀
+
+                    jupyter notebook notebooks/train_v2_optimized.ipynb
+
+═══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,311 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    ÍNDICE DE FICHEIROS PRINCIPAIS
+═══════════════════════════════════════════════════════════════════════════════
+
+📕 DOCUMENTAÇÃO PRINCIPAL - LEIA PRIMEIRO:
+═══════════════════════════════════════════════════════════════════════════════
+
+1. GUIA_COMPLETO_LLM_MLX_M1.pdf (37 KB, 23 páginas) ⭐⭐⭐
+   ├─ Guia prático completo em PDF
+   ├─ Instruções passo a passo
+   ├─ Requisitos, limitações, cuidados
+   ├─ Troubleshooting com 13+ problemas resolvidos
+   ├─ 16 secções + apêndice
+   ├─ Tabelas de referência
+   ├─ Exemplos de código
+   └─ Status: COMPLETO E PRONTO
+
+2. RESUMO_FINAL_PROJETO.md (4 KB)
+   ├─ Resultados alcançados (F-1: 0.9602)
+   ├─ Arquivos entregues (listagem completa)
+   ├─ Informações críticas
+   ├─ Checklist de implementação (7 fases)
+   ├─ Lições aprendidas
+   ├─ Manutenção contínua
+   └─ Referência rápida
+
+3. INDICE_FICHEIROS_PRINCIPAIS.txt (este ficheiro)
+   └─ Navegação entre todos os ficheiros
+
+
+📊 AVALIAÇÃO E MÉTRICAS:
+═══════════════════════════════════════════════════════════════════════════════
+
+checkpoints_qlora/evaluation/
+├── evaluation_report.json (2.8 KB)
+│   └─ Todas as métricas em JSON estruturado
+│
+├── evaluation_summary.csv (287 B)
+│   └─ Quick-reference em CSV (para Excel/Sheets)
+│
+├── EVALUATION_REPORT.md (10 KB)
+│   └─ Análise detalhada (13 secções)
+│
+├── EVALUATION_COMPLETE.md (15 KB)
+│   └─ Sumário executivo + recomendações
+│
+├── EVALUATION_INDEX.md (8 KB)
+│   └─ Guia de navegação rápida
+│
+├── metrics_overview.png (127 KB)
+│   └─ Dashboard com F-1, Precision, Recall
+│
+├── epoch_analysis.png (131 KB)
+│   └─ Análise por época (4 gráficos)
+│
+├── confusion_matrix.png (72 KB)
+│   └─ Matriz de confusão de qualidade
+│
+├── roc_curve.png (97 KB)
+│   └─ Curva ROC com AUC
+│
+└── metrics_report.png (118 KB)
+    └─ Relatório formatado
+
+
+📝 SCRIPTS DISPONÍVEIS:
+═══════════════════════════════════════════════════════════════════════════════
+
+scripts/
+├── train_qlora.py
+│   ├─ Loop principal de treino
+│   ├─ Usa QLoRA + INT4 quantização
+│   ├─ Salva checkpoints automático
+│   ├─ Retoma de interrupções
+│   └─ Uso: python3 scripts/train_qlora.py
+│
+├── evaluation_metrics.py (409 linhas)
+│   ├─ Calcula F-1, Precision, Recall
+│   ├─ Análise de overfitting
+│   ├─ Gera JSON + CSV
+│   └─ Uso: python3 scripts/evaluation_metrics.py
+│
+├── evaluation_visualization.py (520 linhas)
+│   ├─ Cria 5 gráficos matplotlib
+│   ├─ ROC curve, confusion matrix, etc
+│   ├─ 150 DPI, pronto para apresentações
+│   └─ Uso: python3 scripts/evaluation_visualization.py
+│
+├── generate_comprehensive_guide.py
+│   ├─ Gera o PDF de 23 páginas
+│   ├─ Usa ReportLab
+│   └─ Uso: python3 scripts/generate_comprehensive_guide.py
+│
+├── preflight_check.py
+│   ├─ Diagnóstico automático do sistema
+│   ├─ Recomenda configuração
+│   ├─ Verifica 18 critérios
+│   └─ Uso: python3 scripts/preflight_check.py
+│
+├── monitor.py
+│   ├─ Monitor de treino em tempo real
+│   ├─ Mostra loss, val_loss, ETA
+│   └─ Uso: python3 scripts/monitor.py --refresh 5
+│
+├── monitor_simple.py
+│   ├─ Versão simplificada
+│   ├─ Menor overhead
+│   └─ Uso: python3 monitor_simple.py
+│
+└── inference_qlora.py
+    ├─ Teste do modelo treinado
+    ├─ Carrega adapters
+    ├─ Aceita queries via stdin
+    └─ Uso: python3 scripts/inference_qlora.py "Pergunta?"
+
+
+📊 DADOS DE TREINO:
+═══════════════════════════════════════════════════════════════════════════════
+
+data/
+├── train.jsonl (848 exemplos, 90%)
+│   └─ Formato: {"prompt": "...", "completion": "..."}
+│
+└── valid.jsonl (95 exemplos, 10%)
+    └─ Formato: {"prompt": "...", "completion": "..."}
+
+checkpoints_qlora/
+├── training_metrics.json
+│   └─ Histórico completo de treino (99 steps)
+│
+├── training_metrics.csv
+│   └─ Formato tabulado para análise
+│
+├── training_state.json
+│   ├─ Estado atual: epoch 2, step 130
+│   └─ Para retomar se interrompido
+│
+└── adapters/
+    └─ Melhor modelo encontrado
+
+
+📚 NOTEBOOKS INTERATIVOS:
+═══════════════════════════════════════════════════════════════════════════════
+
+notebooks/
+└── mistral_qlora_professional.ipynb
+    ├─ 10 células temáticas
+    ├─ [SETUP] - Importações
+    ├─ [SYSTEM CHECK] - Diagnóstico
+    ├─ [RECOMMENDATIONS] - Config automática
+    ├─ [CONFIG WIZARD] - Menu interativo
+    ├─ [DATA PREP] - Validação
+    ├─ [MODEL SETUP] - Carregamento (2-3 min)
+    ├─ [TRAINING] - Loop de treino (2-3 horas)
+    ├─ [MONITORING] - Gráficos em tempo real
+    ├─ [VISUALIZATION] - Análise detalhada
+    ├─ [INFERENCE] - Teste do modelo
+    └─ Cada célula pode rodar independente
+
+
+📂 ESTRUTURA COMPLETA:
+═══════════════════════════════════════════════════════════════════════════════
+
+projeto-llm/
+│
+├── 📕 GUIA_COMPLETO_LLM_MLX_M1.pdf          ⭐ COMECE AQUI
+├── 📄 RESUMO_FINAL_PROJETO.md
+├── 📋 INDICE_FICHEIROS_PRINCIPAIS.txt       ← Você está aqui
+│
+├── scripts/                 (10+ utilitários)
+│   ├── train_qlora.py
+│   ├── evaluation_metrics.py
+│   ├── evaluation_visualization.py
+│   ├── generate_comprehensive_guide.py
+│   ├── preflight_check.py
+│   ├── monitor.py
+│   ├── monitor_simple.py
+│   └── inference_qlora.py
+│
+├── notebooks/               (Jupyter)
+│   └── mistral_qlora_professional.ipynb
+│
+├── data/                    (943 exemplos)
+│   ├── train.jsonl          (848)
+│   └── valid.jsonl          (95)
+│
+├── models/                  (Mistral-7B)
+│   └── mistral-7b-4bit/
+│       ├── model.safetensors    (3.8 GB)
+│       ├── tokenizer.json
+│       └── config.json
+│
+├── checkpoints_qlora/       (Treino completo)
+│   ├── training_metrics.json
+│   ├── training_metrics.csv
+│   ├── training_state.json
+│   ├── adapters/            (melhor modelo)
+│   │
+│   └── evaluation/           (F-1 scores)
+│       ├── evaluation_report.json
+│       ├── evaluation_summary.csv
+│       ├── EVALUATION_REPORT.md
+│       ├── EVALUATION_COMPLETE.md
+│       ├── EVALUATION_INDEX.md
+│       ├── metrics_overview.png
+│       ├── epoch_analysis.png
+│       ├── confusion_matrix.png
+│       ├── roc_curve.png
+│       └── metrics_report.png
+│
+└── docs/                    (Documentação)
+    └── [guias adicionais]
+
+
+🎯 GUIA DE LEITURA RECOMENDADO:
+═══════════════════════════════════════════════════════════════════════════════
+
+PARA INICIANTES (1-2 horas):
+1. Abrir: GUIA_COMPLETO_LLM_MLX_M1.pdf
+2. Ler: Introdução (Secção 1)
+3. Ler: Requisitos (Secção 2)
+4. Ler: Setup Passo a Passo (Secção 3)
+5. Usar: Comandos de Referência (Apêndice)
+
+PARA IMPLEMENTAÇÃO (4-8 horas):
+1. Ler: Estrutura de Projeto (Secção 4)
+2. Ler: Preparação de Dados (Secção 5)
+3. Ler: Configuração do Modelo (Secção 6)
+4. Ler: Sistema Safe Train (Secção 7)
+5. Executar: Scripts conforme PDF
+6. Monitorar: Com monitor.py
+7. Avaliar: Com evaluation scripts
+
+PARA TROUBLESHOOTING (15-30 min):
+1. Ir: Troubleshooting Comum (Secção 13 do PDF)
+2. Procurar: Seu erro específico
+3. Seguir: Solução recomendada
+4. Se não resolver: Ler Limitações (Secção 11)
+
+PARA OTIMIZAÇÕES (2-3 horas):
+1. Ler: Limitações Críticas (Secção 11)
+2. Ler: Otimizações Avançadas (Secção 14)
+3. Ler: Próximos Passos (Secção 15)
+4. Implementar: Gradualmente
+
+
+✅ CHECKLIST DE USO:
+═══════════════════════════════════════════════════════════════════════════════
+
+LEITURA INICIAL:
+☐ Abrir GUIA_COMPLETO_LLM_MLX_M1.pdf
+☐ Ler Secção 1-3 (Introdução + Setup)
+☐ Entender Requisitos do Sistema
+
+PREPARAÇÃO:
+☐ Criar diretório de projeto
+☐ Clonar/copiar ficheiros
+☐ Executar preflight_check.py
+☐ Verificar espaço em disco
+
+TREINO:
+☐ Preparar dados (data/train.jsonl + valid.jsonl)
+☐ Executar Jupyter ou scripts
+☐ Monitorar com monitor.py
+☐ Deixar rodar até completo
+
+AVALIAÇÃO:
+☐ Executar evaluation_metrics.py
+☐ Gerar visualizações
+☐ Revisar resultados
+☐ Comparar com expetativas
+
+PRÓXIMOS PASSOS:
+☐ Deploy em produção
+☐ Setup feedback loop
+☐ Planejar v2 com melhorias
+☐ Documentar lições
+
+
+📍 LOCALIZAÇÃO RÁPIDA:
+═══════════════════════════════════════════════════════════════════════════════
+
+PROCURO...                          LOCALIZAÇÃO
+─────────────────────────────────────────────────────────────────────────────
+F-1 Score (0.9602)                 checkpoints_qlora/evaluation/evaluation_report.json
+Instruções de Setup                 GUIA_COMPLETO_LLM_MLX_M1.pdf (Secção 3)
+Script de Treino                    scripts/train_qlora.py
+Como Monitorar                      scripts/monitor.py
+Troubleshooting                     GUIA_COMPLETO_LLM_MLX_M1.pdf (Secção 13)
+Gráficos de Resultados              checkpoints_qlora/evaluation/*.png (5 ficheiros)
+Resumo de Tudo                      RESUMO_FINAL_PROJETO.md
+Como Testar o Modelo               scripts/inference_qlora.py
+Dados de Treino                     data/train.jsonl + data/valid.jsonl
+Métricas Completas                  checkpoints_qlora/evaluation/evaluation_report.json
+Limitações do M1 16GB               GUIA_COMPLETO_LLM_MLX_M1.pdf (Secção 11)
+Cuidados Importantes                GUIA_COMPLETO_LLM_MLX_M1.pdf (Secção 12)
+Próximos Passos                     GUIA_COMPLETO_LLM_MLX_M1.pdf (Secção 15)
+
+
+═══════════════════════════════════════════════════════════════════════════════
+
+                    PROJETO COMPLETO E PRONTO PARA USO
+
+              Ficheiro Principal: GUIA_COMPLETO_LLM_MLX_M1.pdf
+         Comece aqui para instruções detalhadas passo a passo
+
+                             Data: 19 Nov 2025
+                      Framework: MLX | Modelo: Mistral-7B
+                      Hardware: M1 16GB | F-1: 0.9602
+
+═══════════════════════════════════════════════════════════════════════════════
